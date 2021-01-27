@@ -16,12 +16,11 @@ const zero = (a,b) => b
 const one = (a,b) => a(b)
 
 const add = (a,b) => (x,y) => a(x,b(x,y))
-const mult = (a,b) => (x,y) => a(y => b(x,y),y)
-const exp = (a,b) => (x,y) => a()
+const mult = (a,b) => b(x => add(a,x),zero)
+const exp = (a,b) => b(x => mult(a,x),one)
+
+const two = add(one,one)
+const three = add(one,two)
 
 let num = 0
 const fu = (x) => ++x
-
-const two = add(one,one)
-
-console.log(mult(add(two,two),add(two,two))(fu,0))
